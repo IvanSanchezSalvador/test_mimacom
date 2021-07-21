@@ -1,0 +1,23 @@
+.cardContainer {
+    margin: 8px;
+    border-radius: 4px;
+    box-shadow: 0.8px 1.6px 4.8px -0.8px rgba(0, 0, 0, 0.45);
+    img {
+        border-radius: 4px 4px 0 0;
+        height: 100px;
+        width: 280px;
+        object-fit: cover;
+    }
+    .detailsItem {
+        padding: 10px;
+        
+        .containerNameItem {
+            display: flex;
+            justify-content: space-between;
+        }
+        .productDescription {
+            margin-top: 6px;
+        }
+    }
+    
+}
