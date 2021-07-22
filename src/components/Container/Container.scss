@@ -1,8 +1,15 @@
 .container {
+    width: 62%;
     padding: 30px;
     display: flex;
     flex-wrap: wrap;
     .card {
         padding: 5px;
+    }
+    .items {
+        display: flex;
+        flex-wrap: inherit;
+        width: 100%;
+        margin-top: 80px;
     }
 }

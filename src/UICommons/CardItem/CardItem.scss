@@ -1,7 +1,31 @@
+$marginTop: 10px;
+%space-between {
+    display: flex;
+    justify-content: space-between;
+}
+
 .cardContainer {
+    width: 279px;
     margin: 8px;
     border-radius: 4px;
     box-shadow: 0.8px 1.6px 4.8px -0.8px rgba(0, 0, 0, 0.45);
+    .favoriteButton {
+        position: relative;
+        svg {
+            color: white;
+            position: absolute;
+            right: 0;
+            margin-top: 8px;
+            margin-right: 8px;
+
+            font-size: 20px;
+        }
+    }
+    .isFavorite {
+        svg {
+            color: #ba000d;
+        }
+    }
     img {
         border-radius: 4px 4px 0 0;
         height: 100px;
@@ -10,14 +34,39 @@
     }
     .detailsItem {
         padding: 10px;
-        
+
         .containerNameItem {
-            display: flex;
-            justify-content: space-between;
+            @extend %space-between;
+            .priceItem {
+                font-size: 18px;
+                font-weight: 700;
+            }
         }
         .productDescription {
-            margin-top: 6px;
+            margin-top: $marginTop;
+        }
+        .containerFooter {
+            margin-top: 10px;
+            @extend %space-between;
+            .stockItem {
+                margin-top: $marginTop;
+            }
+            .noStock {
+                color: #dc004e;
+            }
+            button {
+                background-color: #35baf6;
+                color: white;
+                &[disabled] {
+                    background-color: rgba(0, 0, 0, 0.12);
+                }
+                &:active:enabled {
+                    box-shadow: 3px 2px 22px 1px rgba(0, 0, 0, 0.24);
+                }
+                &:hover:enabled {
+                    background-color: #03a9f4;
+                }
+            }
         }
     }
-    
 }

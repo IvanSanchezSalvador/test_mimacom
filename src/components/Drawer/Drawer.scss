@@ -1,0 +1,121 @@
+.drawer {
+    flex-shrink: 0;
+    flex: 0 0 auto;
+    height: calc(100% - 80px);
+    background: white;
+    position: fixed;
+    top: 80px;
+    right: 0;
+    bottom: 0;
+    width: 450px;
+    box-shadow: 1px 0px 7px rgba(0, 0, 0, 0.5);
+    transform: translateX(100%);
+    transition: transform 0.3s ease-out;
+    @media (max-width: 780px) {
+        display: none;
+        padding-left: unset;
+        padding-right: unset;
+    }
+}
+
+.drawer.open {
+    transform: translateX(0);
+}
+
+.containerDrawer {
+    width: 100%;
+    height: 90%;
+    .containerTitle {
+        top: 0;
+        position: relative;
+        background-color: white;
+        display: flex;
+        text-align: center;
+        align-items: center;
+        height: 50px;
+        .titleDrawer {
+            margin-left: 15px;
+            width: 100%;
+            color: #024a96;
+            font-size: 1.25rem;
+            font-weight: 600;
+            line-height: 1.6rem;
+            letter-spacing: 0.025rem;
+        }
+    }
+
+    .containerList {
+        overflow-x: auto;
+        padding: 15px;
+        width: 100%;
+        height: 90%;
+        .containerListItems {
+            display: flex;
+            flex-direction: column;
+            padding: 30px;
+            .itemsDrawer {
+                flex-direction: row;
+                display: flex;
+                margin-top: 30px;
+                justify-content: space-between;
+                .imageDrawer {
+                    img {
+                        border-radius: 4px 4px 4px 4px;
+                        height: 80px;
+                        width: 100px;
+                        object-fit: cover;
+                    }
+                }
+                .detailsItem {
+                    margin-left: 5px;
+                    display: flex;
+                    flex-direction: column;
+                    justify-content: space-between;
+                    align-items: center;
+                    .buttonsActions {
+                        display: flex;
+                        input {
+                            width: 30px;
+                            height: 20px;
+                            text-align: center;
+                        }
+                        button {
+                            width: 30px;
+                            height: 25px;
+                        }
+                    }
+                }
+                .totalPrice {
+                    width: 80px;
+                    margin-left: 30px;
+                    display: flex;
+                    align-items: center;
+                    justify-content: flex-end;
+                }
+            }
+        }
+    }
+
+    .containerCheckout {
+        position: relative;
+        width: 100%;
+        background-color: white;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        height: 10px;
+        button {
+            width: 95%;
+            justify-content: flex-end;
+            border: 0;
+            text-align: center;
+            display: inline-block;
+            padding: 14px;
+            margin: 7px;
+            color: #ffffff;
+            background-color: #36a2eb;
+            border-radius: 8px;
+            font-weight: 600;
+        }
+    }
+}
