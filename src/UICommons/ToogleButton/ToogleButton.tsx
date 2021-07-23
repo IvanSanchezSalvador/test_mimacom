@@ -1,11 +1,7 @@
 import React from 'react';
 import { AiFillHeart } from 'react-icons/ai';
 import { AiOutlineHeart } from 'react-icons/ai';
-
-type ToogleType = {
-    active: boolean;
-};
-
+import { ToogleType } from 'lib';
 
 export const ToogleButton = ({ active }: ToogleType) => {
     return (

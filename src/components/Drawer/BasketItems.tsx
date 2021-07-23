@@ -2,6 +2,7 @@ import { Item } from 'lib';
 
 import { removeUnit, addUnit } from 'store/listProducts';
 import { useDispatch } from 'react-redux';
+import { ButtonComponent } from 'UICommons';
 
 import { formatCurrency } from 'utils';
 
@@ -33,17 +34,13 @@ export const BasketItems = (props: { basketProducts: Item[] }) => {
                         <div className='detailsItem'>
                             <span>{productName}</span>
                             <div className='buttonsActions'>
-                                <button id={id} onClick={removeUnitClick}>
-                                    -
-                                </button>
+                                <ButtonComponent id={id} text={'-'} clickButton={removeUnitClick} />
                                 <input
                                     value={quantity}
                                     disabled
                                     type='text'
                                 />
-                                <button id={id} onClick={addUnitClick}>
-                                    +
-                                </button>
+                                <ButtonComponent id={id} text={'+'} clickButton={addUnitClick} />
                             </div>
                         </div>
                         <div className='totalPrice'>

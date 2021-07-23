@@ -10,6 +10,16 @@ header {
         justify-content: space-between;
         .containerButtons {
             display: flex;
+            .totalBasket {
+                position: absolute;
+                width: 22px;
+                background-color: rebeccapurple;
+                border-radius: 10px;
+                display: flex;
+                justify-content: center;
+                bottom: 8px;
+                color: white;
+            }
         }
         img {
             height: 80px;

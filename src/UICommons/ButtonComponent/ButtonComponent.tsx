@@ -1,12 +1,5 @@
 import './ButtonComponent.scss';
-
-type ButtonType = {
-    text?: string;
-    icon?: Object;
-    disabled?: boolean;
-    clickButton?: React.MouseEventHandler<HTMLButtonElement>;
-    id?: string;
-};
+import { ButtonType } from 'lib';
 
 export const ButtonComponent = ({
     text,

@@ -1,21 +1,26 @@
-import './Header.scss';
 import { AiOutlineShoppingCart, AiFillStar } from 'react-icons/ai';
 import { ButtonComponent } from 'UICommons';
-import { useDispatch } from 'react-redux';
+import { useDispatch, useSelector, RootStateOrAny } from 'react-redux';
 import { changeViewDrawer } from 'store/listProducts';
+import { changeStatus } from 'store/drawer';
+import './Header.scss';
 
 export const Header = () => {
     const dispatch = useDispatch();
+    const { basketProducts } = useSelector(
+        (store: RootStateOrAny) => store.listProducts,
+    );
 
     const changeDrawerView = (
         e: React.MouseEvent<Element, MouseEvent>,
     ) => {
         const { id } = e.currentTarget;
         dispatch(changeViewDrawer(id));
+        dispatch(changeStatus(true));
     };
 
     return (
-        <header>
+        <header data-testid='header'>
             <nav>
                 <img
                     alt='mimacom'
@@ -26,12 +31,17 @@ export const Header = () => {
                         id={'favorites'}
                         icon={<AiFillStar />}
                         clickButton={changeDrawerView}
+                        data-testid={'favorite'}
                     />
-                    <ButtonComponent
-                        id={'basket'}
-                        icon={<AiOutlineShoppingCart />}
-                        clickButton={changeDrawerView}
-                    />
+                    <div>
+                        <span className='totalBasket'>{basketProducts.length}</span>
+                        <ButtonComponent
+                            id={'basket'}
+                            icon={<AiOutlineShoppingCart />}
+                            clickButton={changeDrawerView}
+                            data-testid={'basket'}
+                        />
+                    </div>
                 </div>
             </nav>
         </header>

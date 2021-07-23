@@ -1,5 +1,5 @@
 import { createAsyncThunk, createSlice } from '@reduxjs/toolkit';
-import { Item } from 'lib';
+import { Item, ThunkApi, InitialListProducts } from 'lib';
 
 export const getListProducts = createAsyncThunk(
     'listProducts/getListProducts',
@@ -34,13 +34,27 @@ export const getFavorites = createAsyncThunk(
 
 export const updateStock = createAsyncThunk(
     'listProducts/updateStock',
-    async () => {
-        
+    async (state, payload: ThunkApi) => {
+        const {
+            listProducts: { basketProducts },
+        } = payload.getState();
+
+        const promises = basketProducts.map((item: Item) =>
+            fetch(`http://localhost:3000/grocery/${item.id}`, {
+                method: 'GET',
+                headers: { 'Access-Control-Allow-Credentials': 'true' },
+            }),
+        );
+
+        const results = await Promise.all(promises).then((values) => {
+            return Promise.all(values.map((r: any) => r.json()));
+        });
+        return results;
     },
-)
+);
 
 const addRemoveUnit = (
-    state: InitialType,
+    state: InitialListProducts,
     payload: string,
     addRemoveAction: string,
 ) => {
@@ -63,18 +77,9 @@ const addRemoveUnit = (
     }
 };
 
-type InitialType = {
-    listProducts: Item[];
-    basketProducts: Item[];
-    loading: boolean;
-    drawerView: string;
-    favorites: Item[];
-};
-
-const initialState: InitialType = {
+const initialState: InitialListProducts = {
     listProducts: [],
     basketProducts: [],
-    loading: false,
     drawerView: 'basket',
     favorites: [],
 };
@@ -120,6 +125,16 @@ export const listProducts = createSlice({
         );
         builder.addCase(getFavorites.fulfilled, (state, { payload }) => {
             state.favorites = payload;
+        });
+        builder.addCase(updateStock.fulfilled, (state, { payload }) => {
+            state.basketProducts = [];
+
+            payload.forEach((res: Item) => {
+                const indexToModify = state.listProducts.findIndex(
+                    (prod) => prod.id === res.id,
+                );
+                state.listProducts[indexToModify].stock = res.stock;
+            });
         });
     },
 });

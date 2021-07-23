@@ -26,7 +26,11 @@ export const Favorites = () => {
                             { image_url, productName, price }: Item,
                             index: number,
                         ) => (
-                            <div key={index} className='itemsDrawer'>
+                            <div
+                                key={index}
+                                className='itemsDrawer'
+                                style={{ justifyContent: 'unset' }}
+                            >
                                 <div className='imageDrawer'>
                                     <img
                                         alt='itemDrawer'
@@ -35,9 +39,9 @@ export const Favorites = () => {
                                 </div>
                                 <div className='detailsItem'>
                                     <span>{productName}</span>
-                                </div>
-                                <div className='totalPrice'>
-                                    {formatCurrency(price)} $
+                                    <div className='totalPrice'>
+                                        {formatCurrency(price)} $
+                                    </div>
                                 </div>
                             </div>
                         ),

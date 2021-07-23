@@ -1,11 +1,14 @@
+import React from 'react';
 import { useSelector, RootStateOrAny } from 'react-redux';
 import { Item } from 'lib';
 import { formatCurrency } from 'utils';
 import { BasketItems } from './BasketItems';
-
 import { Favorites } from './Favorites';
+import { updateStock } from 'store/listProducts';
+
+import { useDispatch } from 'react-redux';
+
 import './Drawer.scss';
-import React from 'react';
 
 const calculateTotalBasket = (basketProducts: Item[]) => {
     const total = basketProducts.reduce(
@@ -21,13 +24,19 @@ const calculateTotalBasket = (basketProducts: Item[]) => {
 };
 
 export const DrawerContent = () => {
+    const dispatch = useDispatch();
+
     const { basketProducts, drawerView } = useSelector(
         (store: RootStateOrAny) => store.listProducts,
     );
 
+    const checkoutBasket = (e: React.MouseEvent<Element, MouseEvent>) => {
+        dispatch(updateStock());
+    };
+
     return (
         <React.Fragment>
-            {drawerView === 'basket' ? (
+            {/basket/.test(drawerView) ? (
                 <div className='containerDrawer'>
                     <div className='containerTitle'>
                         <span className='titleDrawer'>{`(${basketProducts.length}) Items in basket`}</span>
@@ -36,7 +45,7 @@ export const DrawerContent = () => {
                         <BasketItems basketProducts={basketProducts} />
                     </div>
                     <div className='containerCheckout'>
-                        <button>
+                        <button onClick={checkoutBasket}>
                             Checkout {calculateTotalBasket(basketProducts)}
                             $
                         </button>
